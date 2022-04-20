@@ -2,6 +2,7 @@
 #define SENSOR PB2
 #define LED PB3
 #define OUT_SIGNAL PB0
+#define LIMIT 2
 
 void setup() {
 	CLKPR &= ~((1<<0)|(1<<1)|(1<<2)|(1<<3)); // Clock Prescale Register to 0b0000 > divide by 1
@@ -38,7 +39,7 @@ void setup() {
 	// Stop
 
 	// Result
-	if (count > 5) { // Full of Water
+	if (count > LIMIT) { // Full of Water
 		digitalWrite(OUT_SIGNAL, HIGH);	// HIGH output signal
 	} else { // Empty, no water
 		digitalWrite(OUT_SIGNAL, LOW);		// LOW output signal
@@ -47,9 +48,10 @@ void setup() {
 	for (uint8_t i=0; i<count; i+=1){
 		blink();
 	}
+	delay(125); // 1 second
 
 	// LED
-	if (count > 5) { // Full of Water
+	if (count > LIMIT) { // Full of Water
 		digitalWrite(LED, HIGH);	// OFF
 	} else { // Empty, no water
 		digitalWrite(LED, LOW);		// ON
