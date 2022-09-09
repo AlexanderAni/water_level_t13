@@ -4,6 +4,15 @@
 #define OUT_SIGNAL PB0
 #define LIMIT 2
 
+/*
+This is attiny 13 water sensor.
+It works same like touch sensor.
+Just glue the sensor on the bottle.
+After power on it calculates time of charge-discharge (led blinks).
+Too long charge: there is water in a bottle. Led is off.
+Too fast charge: no water. Led is on.
+*/
+
 void setup() {
 	CLKPR &= ~((1<<0)|(1<<1)|(1<<2)|(1<<3)); // Clock Prescale Register to 0b0000 > divide by 1
 	// DDRB &= ~(1<<SENSOR);		// set SENSOR as input
